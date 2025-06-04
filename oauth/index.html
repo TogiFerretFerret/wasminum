@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script defer src="https://cdn.jsdelivr.net/npm/libcurl.js@0.7.1/libcurl.js" onload="libcurl.load_wasm('https://cdn.jsdelivr.net/npm/libcurl.js@0.7.1/libcurl.wasm');"></script>
+    <script>
+        let a2d=(arr)=>arr.reduce((dict,[key,value])=>{dict[key]=value;return dict;},{});
+        var libcurl_loaded=false;
+        class BbAuthWrapper {
+            constructor(){
+                if (libcurl_loaded==false){throw new Error("LibCurl not yet loaded!");}
+                this.username=localStorage.getItem("username");
+                this.tt="";
+                this.asvc="";
+                this.gcode=localStorage.getItem("code");;
+                this.bearer="";
+                this.state=localStorage.getItem("state");
+                this.asis=localStorage.getItem("asis");
+            }
+            async get_asvc(){
+              var target_url=`https://sts.sky.blackbaud.com/azureadb2c/callback/bbid/B2C_1A_OIDC?state=${this.state}&code=${this.gcode}`;
+              return await libcurl.fetch(target_url,{method: 'GET',headers: {'cookie':this.asis},redirect: 'manual'});
+            }
+        }
+        let wisp_urls=["wss://lichology.com/wisp/","wss://mages.io/wisp/","wss://onlinegames.ro/wisp/","wss://onlinegames.ro/wisp/","wss://wisp.rhw.one/ws/"] // Not actively maintained list?
+        document.addEventListener("libcurl_load", ()=>{
+            libcurl.set_websocket(wisp_urls[0]);
+            console.log("libcurl.js ready!");
+            libcurl_loaded=true;
+            var bbw=new BbAuthWrapper();
+            console.log(await bbw.get_asvc());
+        });
+    </script>
+</body>
+</html>
