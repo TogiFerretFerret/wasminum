@@ -32,7 +32,7 @@
             console.log(await bbw.get_asvc());
         }
         let wisp_urls=["wss://lichology.com/wisp/","wss://mages.io/wisp/","wss://onlinegames.ro/wisp/","wss://onlinegames.ro/wisp/","wss://wisp.rhw.one/ws/"] // Not actively maintained list?
-        document.addEventListener("libcurl_load", ()=>{
+        document.addEventListener("libcurl_load", async ()=>{
             libcurl.set_websocket(wisp_urls[0]);
             console.log("libcurl.js ready!");
             libcurl_loaded=true;
