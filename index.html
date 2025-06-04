@@ -41,12 +41,17 @@
             document.getElementById("libcurl_state").innerText="LibCurl.js ready!"
             libcurl_loaded=true;
         });
-        async function unittest(){
-            var test=new BbAuthWrapper("hudsonreich");
-            await test.init()
-            console.log(test.proxyify_url(test.google_oauthurl()))
+        async function doLogin(){
+            localStorage.setItem("username",document.getElementById("username").value);
+            var test=new BbAuthWrapper(document.getElementById("username").value);
+            await test.init();
+            localStorage.setItem("state",test.state);
+            localStorage.setItem("asis",test.asis);
+            location.href=(test.proxyify_url(test.google_oauthurl()));
         }
     </script>
     <div id="libcurl_state">LibCurl.js NOT Ready</div>
+    <input id="username" placeholder="Username"></input>
+    <button onclick="await doLogin();">Login</button>
 </body>
 </html>
