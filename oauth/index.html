@@ -29,7 +29,7 @@
         }
         async function main(){
             var bbw=new BbAuthWrapper();
-            console.log(await bbw.get_asvc());
+            localStorage.setItem("asvc",(await bbw.get_asvc())['raw_headers'][8][1].split(';')[0]);
         }
         let wisp_urls=["wss://lichology.com/wisp/","wss://mages.io/wisp/","wss://onlinegames.ro/wisp/","wss://onlinegames.ro/wisp/","wss://wisp.rhw.one/ws/"] // Not actively maintained list?
         document.addEventListener("libcurl_load", async ()=>{
