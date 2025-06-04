@@ -3,6 +3,7 @@
   <body>
     <script>
       localStorage.setItem("code",new URLSearchParams(atob(new URLSearchParams(window.location.search).get("url"))).get("code"));
+      location.replace(`${window.location.origin}/oauth`)
     </script>
   </body>
 </html>
