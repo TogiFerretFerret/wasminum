@@ -1,1 +1,8 @@
-et
+<!DOCTYPE html>
+<html>
+  <body>
+    <script>
+      localStorage.setItem("code",new URLSearchParams(atob(new URLSearchParams(window.location.search).get("url"))).get("code"));
+    </script>
+  </body>
+</html>
