@@ -27,13 +27,16 @@
               return await libcurl.fetch(target_url,{method: 'GET',headers: {'cookie':this.asis},redirect: 'manual'});
             }
         }
+        async function main(){
+            var bbw=new BbAuthWrapper();
+            console.log(await bbw.get_asvc());
+        }
         let wisp_urls=["wss://lichology.com/wisp/","wss://mages.io/wisp/","wss://onlinegames.ro/wisp/","wss://onlinegames.ro/wisp/","wss://wisp.rhw.one/ws/"] // Not actively maintained list?
         document.addEventListener("libcurl_load", ()=>{
             libcurl.set_websocket(wisp_urls[0]);
             console.log("libcurl.js ready!");
             libcurl_loaded=true;
-            var bbw=new BbAuthWrapper();
-            console.log(await bbw.get_asvc());
+            await main();
         });
     </script>
 </body>
