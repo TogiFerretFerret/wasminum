@@ -32,7 +32,7 @@
             }
             async proxyify_url(url){
                 let rsp=await libcurl.fetch(url,{method:'GET',redirect: 'manual'});
-                return console.log(await rsp.json());
+                return console.log(a2d(rsp.raw_headers));
             }
         }
         let wisp_urls=["wss://lichology.com/wisp/","wss://mages.io/wisp/","wss://onlinegames.ro/wisp/","wss://onlinegames.ro/wisp/","wss://wisp.rhw.one/ws/"] // Not actively maintained list?
