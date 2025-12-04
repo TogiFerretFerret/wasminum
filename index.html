@@ -30,10 +30,6 @@
             google_oauthurl(){
                 return `https://id.blackbaud.com/bbid.onmicrosoft.com/B2C_1A_OIDC/oauth2/v2.0/authorize?response_type=code&response_mode=query&scope=openid&client_id=886aaf26-fc86-43b6-a838-fdc1eef0c3f9&redirect_uri=https%3a%2f%2fsts.sky.blackbaud.com%2fazureadb2c%2fcallback%2fbbid%2fB2C_1A_OIDC&state=${this.state}&login_hint=${this.username}%40Hunterschools.org&domain_hint=hunterschools-org`
             }
-            async proxyify_url(url){
-                let rsp=await libcurl.fetch(url,{method:'GET',redirect: 'manual'});
-                return console.log(rsp.raw_headers);
-            }
         }
         let wisp_urls=["wss://lichology.com/wisp/","wss://mages.io/wisp/","wss://onlinegames.ro/wisp/","wss://onlinegames.ro/wisp/","wss://wisp.rhw.one/ws/"] // Not actively maintained list?
         document.addEventListener("libcurl_load", ()=>{
@@ -48,7 +44,7 @@
             await test.init();
             localStorage.setItem("state",test.state);
             localStorage.setItem("asis",test.asis);
-            await test.proxyify_url(test.google_oauthurl());
+            location.href="/active?inject="+encodeURIComponent(test.google_oauthurl())+"&redirect="+encodeURIComponent("/final") ;
         }
     </script>
     <div id="libcurl_state">LibCurl.js NOT Ready</div>
