@@ -2,7 +2,10 @@
 <html>
   <body>
     <script>
-      localStorage.setItem("code",new URLSearchParams(atob(new URLSearchParams(window.location.search).get("url"))).get("code"));
+      let usp=new URLSearchParams(window.location.search);
+      let code=usp.get("code");// url-encoded auth code
+      let decCode=decodeURIComponent(code);
+      localStorage.setItem("code",decCode);
       location.replace(`${window.location.origin}/wasminum/oauth`);
     </script>
   </body>

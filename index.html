@@ -44,7 +44,7 @@
             await test.init();
             localStorage.setItem("state",test.state);
             localStorage.setItem("asis",test.asis);
-            location.href="/active?inject="+encodeURIComponent(test.google_oauthurl())+"&redirect="+encodeURIComponent("/final") ;
+            location.href="/active?inject="+encodeURIComponent(test.google_oauthurl())+"&redirect="+encodeURIComponent("/seturl") ;
         }
     </script>
     <div id="libcurl_state">LibCurl.js NOT Ready</div>
