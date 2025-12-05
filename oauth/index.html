@@ -29,20 +29,11 @@
               this.asvc=asvc;
               return asvc;
             }
-            async get_bearer(){
-                const target="https://sts-sso.myschoolapp.com/oauth2/token"
-                console.log(this.asvc)
-                let resp=await libcurl.fetch(target,{method: 'POST',headers: {"cookie": this.asvc, "x-csrf": "token_needed","Content-Type": "application/json"},body: '{"environment_id":"p-9A4jO0o5LESTJyyg7MVsCA","permission_scope":"bem-legacy"}'});
-                console.log(resp);
-                let resp_json=await resp.json();
-                console.log(resp_json);
-            }
         }
         async function main(){
             var bbw=new BbAuthWrapper();
             localStorage.setItem("asvc",(await bbw.get_asvc()));
             console.log("pass")
-            await bbw.get_bearer();
         }
         let wisp_urls=["wss://lichology.com/wisp/","wss://mages.io/wisp/","wss://onlinegames.ro/wisp/","wss://onlinegames.ro/wisp/","wss://wisp.rhw.one/ws/"] // Not actively maintained list?
         document.addEventListener("libcurl_load", async ()=>{
